@@ -41,7 +41,7 @@ def clean_and_prepare_data(df, dataset_name="Dataset", scale=True, verbose=True)
     df_clean.dropna(how='all', inplace=True)
     rows_dropped_all_nan = initial_rows - len(df_clean)
     if verbose and rows_dropped_all_nan > 0:
-        print(f"✓ Dropped {rows_dropped_all_nan} rows with all missing values")
+        print(f"Dropped {rows_dropped_all_nan} rows with all missing values")
     
     # Step 3: Handle missing values
     numeric_cols = df_clean.select_dtypes(include=[np.number]).columns
@@ -61,7 +61,7 @@ def clean_and_prepare_data(df, dataset_name="Dataset", scale=True, verbose=True)
             df_clean[col].fillna(mode_val[0] if len(mode_val) > 0 else 'Unknown', inplace=True)
     
     if verbose:
-        print(f"✓ Handled {missing_before} missing values")
+        print(f"Handled {missing_before} missing values")
         print(f"  - Numeric columns filled with median")
         print(f"  - Categorical columns filled with mode/Unknown")
     
@@ -70,7 +70,7 @@ def clean_and_prepare_data(df, dataset_name="Dataset", scale=True, verbose=True)
     df_clean.drop_duplicates(inplace=True)
     duplicates_removed = duplicates_before - len(df_clean)
     if verbose and duplicates_removed > 0:
-        print(f"✓ Removed {duplicates_removed} duplicate rows")
+        print(f"Removed {duplicates_removed} duplicate rows")
     
     # Step 5: Detect outliers (for information)
     outlier_count = 0
@@ -83,18 +83,18 @@ def clean_and_prepare_data(df, dataset_name="Dataset", scale=True, verbose=True)
         outlier_count += ((df_clean[col] < lower_bound) | (df_clean[col] > upper_bound)).sum()
     
     if verbose:
-        print(f"✓ Outliers detected (IQR method): {outlier_count} values")
-        print(f"  (Kept for unsupervised learning analysis)")
+        print(f"Outliers detected (IQR method): {outlier_count} values")
+        print(f"(Kept for unsupervised learning analysis)")
     
     # Step 6: Encode categorical variables
     if len(categorical_cols) > 0:
         df_prepared = pd.get_dummies(df_clean, columns=categorical_cols, drop_first=True)
         if verbose:
-            print(f"✓ Encoded {len(categorical_cols)} categorical columns using one-hot encoding")
+            print(f"Encoded {len(categorical_cols)} categorical columns using one-hot encoding")
     else:
         df_prepared = df_clean.copy()
         if verbose:
-            print(f"✓ No categorical columns to encode")
+            print(f"No categorical columns to encode")
     
     # Step 7: Feature scaling
     if scale:
@@ -105,7 +105,7 @@ def clean_and_prepare_data(df, dataset_name="Dataset", scale=True, verbose=True)
             index=df_prepared.index
         )
         if verbose:
-            print(f"✓ Applied StandardScaler normalization")
+            print(f"Applied StandardScaler normalization")
             print(f"  - Mean: {df_scaled.mean().mean():.6f} (target: 0)")
             print(f"  - Std: {df_scaled.std().mean():.6f} (target: 1)")
     else:
@@ -114,7 +114,7 @@ def clean_and_prepare_data(df, dataset_name="Dataset", scale=True, verbose=True)
     
     if verbose:
         print(f"\nFinal shape: {df_scaled.shape}")
-        print(f"Memory usage: {df_scaled.memory_usage(deep=True).sum() / 1024**2:.2f} MB")
+        #print(f"Memory usage: {df_scaled.memory_usage(deep=True).sum() / 1024**2:.2f} MB")
     
     return df_clean, df_prepared, df_scaled, scaler
 
@@ -212,11 +212,11 @@ def process_all_datasets(train_data, test_data, anime_data, scale=True):
     print("\n" + "="*60)
     print("CLEANED DATASETS READY FOR CLUSTERING")
     print("="*60)
-    print("\n✓ All datasets successfully cleaned and scaled")
-    print("✓ Available for clustering algorithms:")
-    print("  - train_scaled, test_scaled, anime_scaled")
-    print("✓ Scalers saved for future transformation:")
-    print("  - train_scaler, test_scaler, anime_scaler")
+    print("All datasets successfully cleaned and scaled")
+    print("Available for clustering algorithms:")
+    print("train_scaled, test_scaled, anime_scaled")
+    print("Scalers saved for future transformation:")
+    print("- train_scaler, test_scaler, anime_scaler")
     
     # Return all results in a dictionary
     return {

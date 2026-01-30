@@ -1,0 +1,4 @@
+,Dataset,Rows,Columns,Numeric Features,Categorical Features,Missing Values,Duplicates,Completeness (%),Mean of Means,Std of Stds,Min Value,Max Value
+Train,Train,5703554,3,3,0,0,0,100.0,15218.1824,9965.164,1,73516
+Test,Test,633686,2,2,0,0,0,100.0,22843.5711,14954.3807,1,73516
+Anime,Anime,12294,7,3,4,0,0,100.0,10712.0121,22092.3296,1.0,1013917.0
