@@ -1,79 +1,63 @@
-# 2501PTDS_Classification_Project
-2025 Classification Project
-=======
-##### **Please note**: Download the repository as a zipped folder, create a private repository, and upload the content to it. This way, you can collaborate with your teammates effectively.
+# News Article Classification Project
 
-## 2501PTDS_Classification_Project
+Classify news articles into categories using machine learning.
 
-# Analysing News Articles Dataset
-
-
-![](https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white) [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](URL_TO_YOUR_APP)
-
-<div id="main image" align="center">
-  <img src="https://github.com/ereshia/2401FTDS_Classification_Project/blob/main/announcement-article-articles-copy-coverage.jpg" width="550" height="300" alt=""/>
-</div>
-
-## Table of contents
-* [1. Project Overview](#project-description)
-* [2. Dataset](#dataset)
-* [3. Packages](#packages)
-* [4. Environment](#environment)
-* [5. MLFlow](#mlflow)
-* [6. Streamlit](#streamlit)
-* [7. Team Members](#team-members)
-
-## 1. Project Overview <a class="anchor" id="project-description"></a>
-
-Your team has been hired as data science consultants for a news outlet to create classification models using Python and deploy it as a web application with Streamlit. 
-The aim is to provide you with a hands-on demonstration of applying machine learning techniques to natural language processing tasks.  This end-to-end project encompasses the entire workflow, including data loading, preprocessing, model training, evaluation, and final deployment. The primary stakeholders for the news classification project for the news outlet could include the editorial team, IT/tech support, management, readers, etc. These groups are interested in improved content categorization, operational efficiency, and enhanced user experience.
-
-
-## 2. Dataset <a class="anchor" id="dataset"></a>
-The dataset is comprised of news articles that need to be classified into categories based on their content, including `Business`, `Technology`, `Sports`, `Education`, and `Entertainment`. You can find both the `train.csv` and `test.csv` datasets [here](https://github.com/ereshia/2401FTDS_Classification_Project/tree/main/Data/processed).
-
-**Dataset Features:**
-| **Column**                                                                                  | **Description**              
-|---------------------------------------------------------------------------------------------|--------------------   
-| Headlines   | 	The headline or title of the news article.
-| Description | A brief summary or description of the news article.
-| Content | The full text content of the news article.
-| URL | The URL link to the original source of the news article.
-| Category | The category or topic of the news article (e.g., business, education, entertainment, sports, technology).
-
-## 3. Packages <a class="anchor" id="packages"></a>
-
-To carry out all the objectives for this repo, the following necessary dependencies were loaded:
-+ `Pandas 2.2.2` and `Numpy 1.26`
-+ `Matplotlib 3.8.4`
- 
-
-## 4. Environment <a class="anchor" id="environment"></a>
-
-It's highly recommended to use a virtual environment for your projects, there are many ways to do this; we've outlined one such method below. Make sure to regularly update this section. This way, anyone who clones your repository will know exactly what steps to follow to prepare the necessary environment. The instructions provided here should enable a person to clone your repo and quickly get started.
-
-### Create the new evironment - you only need to do this once
+## Quick Start
 
 ```bash
-# create the conda environment
-conda create --name <env>
-```
-
-### This is how you activate the virtual environment in a terminal and install the project dependencies
-
-```bash
-# activate the virtual environment
-conda activate <env>
-# install the pip package
-conda install pip
-# install the requirements for this project
+# Setup environment
+conda create --name newsclassifier python=3.9
+conda activate newsclassifier
 pip install -r requirements.txt
+
+# Train models
+python train_multiple_models.py  # Trains 5 models with tuning
+python train_model.py            # Quick single model training
+
+# Test
+python test_model.py
+
+# Run web app
+cd Streamlit
+streamlit run base_app.py
 ```
-## 5. MLFlow<a class="anchor" id="mlflow"></a>
 
-MLOps, which stands for Machine Learning Operations, is a practice focused on managing and streamlining the lifecycle of machine learning models. The modern MLOps tool, MLflow is designed to facilitate collaboration on data projects, enabling teams to track experiments, manage models, and streamline deployment processes. For experimentation, testing, and reproducibility of the machine learning models in this project, you will use MLflow. MLflow will help track hyperparameter tuning by logging and comparing different model configurations. This allows you to easily identify and select the best-performing model based on the logged metrics.
+## Dataset
 
-- Please have a look here and follow the instructions: https://www.mlflow.org/docs/2.7.1/quickstart.html#quickstart
+News articles with 5 categories:
+- Business, Technology, Sports, Education, Entertainment
+
+Features: Headlines, Description, Content, URL, Category
+
+## Models
+
+Trained 5 models with hyperparameter tuning:
+1. Support Vector Machine (98.30% - Best)
+2. Logistic Regression (98.25%)
+3. Naive Bayes (97.85%)
+4. Gradient Boosting (96.65%)
+5. Random Forest (96.35%)
+
+## Features
+
+- Text preprocessing (tokenization, lemmatization, stopword removal)
+- TF-IDF vectorization (5000 features, unigrams + bigrams)
+- GridSearchCV hyperparameter tuning
+- Multi-model Streamlit web app
+- Visualization scripts
+
+## Files
+
+- `train_multiple_models.py` - Train all models
+- `train_model.py` - Quick training
+- `test_model.py` - Test models
+- `visualize_models.py` - Generate visualizations
+- `Streamlit/base_app.py` - Web interface
+
+## Results
+
+Best model: SVM with 98.30% accuracy
+See `model_comparison_results.csv` for detailed metrics
 
 ## 6. Streamlit<a class="anchor" id="streamlit"></a>
 
